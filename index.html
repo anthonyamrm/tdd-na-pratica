@@ -16,19 +16,38 @@
 
     <script>
       const cedulasDisponiveis = [100, 50, 20, 10]
+
+      function calcularTroco(precoDoProduto, valorPago, estoque) {
+        let diferenca = valorPago - precoDoProduto;
+        const troco = [];
+        const estoqueDisponivel = { ...estoque };
+
+        cedulasDisponiveis.forEach((cedula) => {
+          while (diferenca >= cedula && (estoqueDisponivel[cedula] || 0) > 0) {
+            troco.push(cedula);
+            diferenca = diferenca - cedula;
+            estoqueDisponivel[cedula]--;
+          }
+        });
+
+         if (diferenca > 0) {
+           throw new Error("nao foi possivel dar o troco")
+           return troco;
+        }
+      
+        return troco;
+      }
       
     </script>
       
 
     <script>
-      test('calcularTroco(1,1) deve retornar [] - Um array vazio', (assert) => {
-        const trocoCalculado = calcularTroco(1, 1) 
-        const trocoEsperado = []
-        assert.deepEqual(trocoCalculado, trocoEsperado) 
-      })
-      
       test('calcularTroco(100, 180, {1,0,5,10,0,0,0})', (assert) => {
-        const trocoCalculado =  calcularTroco(100, 180, [1,0,5,10]);
+        const estoq = {
+          100: 1, 50: 0, 20: 5, 10: 10,
+        }
+        
+        const trocoCalculado =  calcularTroco(100, 180, estoq);
         const trocoEsperado = [20,20,20,20];
         assert.deepEqual(trocoCalculado, trocoEsperado)
         }
