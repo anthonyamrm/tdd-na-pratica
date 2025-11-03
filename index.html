@@ -15,46 +15,17 @@
     <script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
 
     <script>
-      const cedulasDisponiveis = [100, 50, 20, 10, 5, 2, 1]
-      function calcularTroco(precoDoProduto, valorPago) {
-        let diferenca = valorPago - precoDoProduto;
-        const troco = [];
-
-        if (diferenca <= 0){
-          return troco;
-        }
-        
-        cedulasDisponiveis.forEach((cedula) => {
-          while (diferenca >= cedula) {
-            troco.push(cedula)
-            diferenca -= cedula
-          }
-        })
-
-        return troco
-      }
+      const cedulasDisponiveis = [100, 50, 20, 10]
+      
     </script>
       
 
     <script>
-      test('calcularTroco(1,1) deve retornar [] - Um array vazio', (assert) => {
-        const trocoCalculado = calcularTroco(1, 1) 
-        const trocoEsperado = []
-        assert.deepEqual(trocoCalculado, trocoEsperado) 
-      })
-      
-      test('calcularTroco(215, 300) deve retornar [50, 20, 10, 5]', (assert) => {
-        const trocoCalculado = calcularTroco(215, 300) 
-        const trocoEsperado = [50, 20, 10, 5]
-        assert.deepEqual(trocoCalculado, trocoEsperado)
-      })
-    
-      test('calcularTroco(486, 600) deve retornar [100, 10, 2, 2]', (assert) => {
-        const trocoCalculado = calcularTroco(486, 600)
-        const trocoEsperado = [100, 10, 2, 2]
-        assert.deepEqual(trocoCalculado, trocoEsperado)
-      })
-    
+      test('calcularTroco(100, 180, {1,0,5,10,0,0,0})', (assert) => {
+        const trocoCalculado =  calcularTroco(100, 180, [1,0,5,10]);
+        const trocoEsperado = [20,20,20,20];
+        }
+      )
     
     </script>
 
