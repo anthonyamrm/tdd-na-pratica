@@ -20,12 +20,21 @@
       function calcularTroco(precoDoProduto, valorPago, estoque) {
         let diferenca = valorPago - precoDoProduto;
         const troco = [];
+        
+        if (diferenca < 0) {
+          throw new Error("valor pago eh insuficiente");
+        }
+        
+        if (diferenca === 0) {
+          return troco;
+        }
+      
         const estoqueDisponivel = { ...estoque };
 
         cedulasDisponiveis.forEach((cedula) => {
           while (diferenca >= cedula && (estoqueDisponivel[cedula] || 0) > 0) {
             troco.push(cedula);
-            diferenca = diferenca - cedula;
+            diferenca -= cedula;
             estoqueDisponivel[cedula]--;
           }
         });
