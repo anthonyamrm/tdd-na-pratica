@@ -21,9 +21,16 @@
       
 
     <script>
+      test('calcularTroco(1,1) deve retornar [] - Um array vazio', (assert) => {
+        const trocoCalculado = calcularTroco(1, 1) 
+        const trocoEsperado = []
+        assert.deepEqual(trocoCalculado, trocoEsperado) 
+      })
+      
       test('calcularTroco(100, 180, {1,0,5,10,0,0,0})', (assert) => {
         const trocoCalculado =  calcularTroco(100, 180, [1,0,5,10]);
         const trocoEsperado = [20,20,20,20];
+        assert.deepEqual(trocoCalculado, trocoEsperado)
         }
       )
     
