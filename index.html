@@ -15,8 +15,22 @@
     <script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
 
     <script>
-      // A sua solução será escrita aqui!
+      const cedulasDisponiveis = [100, 50, 20, 10, 5, 2, 1]
+      function calcularTroco(precoDoProduto, valorPago) {
+        let diferenca = valorPago - precoDoProduto
+        let troco = []
+
+        cedulasDisponiveis.forEach((cedula) => {
+          while (diferenca >= cedula) {
+            troco.push(cedula)
+            diferenca = diferenca - cedula
+          }
+        })
+
+        return troco
+      }
     </script>
+      
 
     <script>
       test('calcularTroco(1,1) deve retornar [] - Um array vazio', (assert) => {
@@ -24,6 +38,20 @@
         const trocoEsperado = []
         assert.deepEqual(trocoCalculado, trocoEsperado) 
       })
+      
+      test('calcularTroco(215, 300) deve retornar [50, 20, 10, 5]', (assert) => {
+        const trocoCalculado = calcularTroco(215, 300) 
+        const trocoEsperado = [50, 20, 10, 5]
+        assert.deepEqual(trocoCalculado, trocoEsperado)
+      })
+    
+      test('calcularTroco(486, 600) deve retornar [100, 10, 2, 2]', (assert) => {
+        const trocoCalculado = calcularTroco(486, 600)
+        const trocoEsperado = [100, 10, 2, 2]
+        assert.deepEqual(trocoCalculado, trocoEsperado)
+      })
+    
+    
     </script>
 
   </body>
